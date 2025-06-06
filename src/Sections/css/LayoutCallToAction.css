@@ -1,0 +1,69 @@
+.layout-call-to-action {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout-call-to-action img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 130vh;
+    object-fit: cover;
+    object-position: 60% 100%;
+    z-index: -1;
+}
+
+.layout-call-to-action button {
+    padding: 24px 28px;
+    width: max-content;
+    height: max-content;
+    border: none;
+    border-radius: 8px;
+    background-color: gainsboro;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.layout-call-to-action button span{
+    position: relative;
+    z-index: 10;
+}
+.layout-call-to-action button:hover {
+    transform: scale(1.1);
+    background-color: #dcdcdc;
+}
+
+.layout-call-to-action button::before {
+    content: "";
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 100px;
+    height: 80px;
+    background: #ff0000;
+    background: 
+    radial-gradient(circle, rgba(255, 0, 0, 0.6) 0%, rgba(255, 119, 0, 0.6) 80%),
+    linear-gradient(300deg, rgba(255, 0, 0, 1) 0%, rgba(255, 119, 0, 1) 100%);
+    animation: .5s, top 0s, left 0s;
+    opacity: 0;
+}
+.layout-call-to-action button:hover::before{
+    opacity: 1;
+}
+.layout-call-to-action button::after{
+    content: "";
+    position: absolute;
+    inset: 2px;
+    background-color: rgba(220, 220, 220);
+    border-radius: 8px;
+}

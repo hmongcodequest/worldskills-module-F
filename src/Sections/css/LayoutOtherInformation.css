@@ -1,0 +1,24 @@
+.btn-tab{
+    /* outline: none; */
+    border: 0;
+    padding: 10px 20px;
+    position: relative;
+}
+.btn-tab.active{
+    background: transparent;
+}
+
+.btn-tab.active::before{
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #0062ff;
+    border-radius: 5px;
+}
+
+.tab-div{
+    padding: 10px;
+}

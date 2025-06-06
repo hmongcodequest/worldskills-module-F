@@ -1,0 +1,106 @@
+.bg-image {
+    max-width: 800px;
+    scale: 1.8;
+    transform: translateX(150px) translateY(25px);
+    object-fit: cover;
+}
+
+#cardHover {
+    transition: all .5s;
+}
+
+#cardHover:hover {
+    scale: 1.1;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+.scroll-container {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.event-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  scroll-snap-align: start;
+  width: 220px;
+}
+
+.event-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.effect-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.effect-img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 200px;
+    transform: translateX(-100px) translateY(0%);
+    rotate: 10deg;
+    background: #ffffff;
+    background: linear-gradient(0deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, 1) 100%);
+    z-index: 10;
+    transition: all 1s;
+}
+
+.effect-img:hover::before {
+    transform: translateX(400px) translateY(-30%);
+    right: 0;
+}
+
+
+.card-row {
+    max-width: 400px;
+    left: 0;
+    transform: translate(4%, 5%);
+}
+
+:where(.map-a, .map-b, .map-c) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: pink;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    position: relative;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+:where(.map-a, .map-b, .map-c)::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    rotate: 45deg;
+    transform: translate(-100%, -25%);
+    transform-origin: center;
+}
+
+.map-a{
+    transform: translate(110px, -90px);
+    /* top: -150px;
+    right: 0px; */
+    rotate: -45deg;
+}
+.map-b{
+    transform: translate(-150px, -80px);
+    rotate: -45deg;
+}
+.map-c{
+    transform: translate(-130px, -350px);
+    rotate: -45deg;
+}
