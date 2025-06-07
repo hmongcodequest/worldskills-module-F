@@ -1,5 +1,7 @@
 .bg-image {
     max-width: 800px;
+    height: 400px;
+    max-height: 600px;
     scale: 1.8;
     transform: translateX(150px) translateY(25px);
     object-fit: cover;
@@ -14,21 +16,22 @@
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
     z-index: 10;
 }
+
 .scroll-container {
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
 }
 
 .event-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  scroll-snap-align: start;
-  width: 220px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    scroll-snap-align: start;
+    width: 220px;
 }
 
 .event-card:hover {
-  transform: scale(1.1);
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
-  z-index: 10;
+    transform: scale(1.1);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
 .effect-img {
@@ -90,17 +93,19 @@
     transform-origin: center;
 }
 
-.map-a{
+.map-a {
     transform: translate(110px, -90px);
     /* top: -150px;
     right: 0px; */
     rotate: -45deg;
 }
-.map-b{
+
+.map-b {
     transform: translate(-150px, -80px);
     rotate: -45deg;
 }
-.map-c{
+
+.map-c {
     transform: translate(-130px, -350px);
     rotate: -45deg;
 }

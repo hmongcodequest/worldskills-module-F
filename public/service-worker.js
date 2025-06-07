@@ -1,13 +1,17 @@
 const CACHE_NAME = 'react-app-v1';
+const BASE_URL = '/ws01_module_c';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/offline.html',
   '/manifest.json',
+  '/manifest.webmanifest',
+  '/registerSW.js',
+  '/workbox.js',
   '/favicon.ico',
   '/logo192.png',
-  '/vite.svg',
-  '/assets/index-BbS77Fy_.js',
-  '/assets/index-CyGY-Uu_.css',
+  '/assets/index.js',
+  '/assets/index.css',
   '/videos/lyon.mp4',
   '/images/all-attractions-low-res.jpg',
   '/images/all-attractions.jpg',
@@ -33,14 +37,24 @@ const urlsToCache = [
   '/latest-events-images/village-des-metiers-p.jpg',
   '/latest-events-images/worldskills-2024-p-low-res.png',
   '/latest-events-images/worldskills-2024-p.png',
-];
+].map(path => BASE_URL + path);
 
 // Install and cache static assets
 self.addEventListener('install', (event) => {
   console.log('[SW] Install');
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
+      return Promise.all(
+        urlsToCache.map(async (url) => {
+          try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`Bad response for ${url}`);
+            await cache.put(url, response.clone());
+          } catch (err) {
+            console.error(`❌ Failed to cache ${url}:`, err);
+          }
+        })
+      );
     })
   );
   self.skipWaiting(); // Activate immediately
@@ -63,19 +77,24 @@ self.addEventListener('activate', (event) => {
 
 // Handle fetch requests
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      return (
-        cachedResponse ||
-        fetch(event.request).catch(() => {
-          // Fallback for navigation requests
-          return caches.match('/index.html');
-          // if (event.request.mode === 'navigate') {
-          // }
-        })
-      );
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      return fetch(event.request).catch((error) => {
+        // Only fallback to index.html for navigation (i.e., page loads)
+        if (event.request.mode === 'navigate') {
+          return caches.match(BASE_URL + '/index.html');
+        }
+
+        // Otherwise: don't return anything (let it fail)
+        return new Response(null, {
+          status: 404,
+          statusText: 'Not found in cache',
+        });
+      });
     })
   );
 });

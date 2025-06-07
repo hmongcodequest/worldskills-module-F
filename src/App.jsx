@@ -22,7 +22,7 @@ function App() {
         //   registrations.forEach((reg) => reg.unregister());
         // });
         navigator.serviceWorker
-          .register("/service-worker.js")
+          .register("/ws01_module_c/service-worker.js")
           .then((registration) => {
             console.log("SW registered successfully:", registration);
           })
